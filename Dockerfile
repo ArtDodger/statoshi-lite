@@ -1,7 +1,7 @@
 # *. Dockerized-Statoshi: Building an image of Statoshi running on Debian 8
 #
 # VERSION   0.10.x
-# URL				http://statoshi.info
+# URL       http://statoshi.info
 
 
 FROM debian:latest
@@ -13,8 +13,8 @@ LABEL statoshi.image-specs="{\"Description\":\"A containerized Statoshi\, a fork
 
 # 0. Update Debian and setting up Debian essentials
 #
-# VERSION		Latest from package manager
-# DOCS			https://registry.hub.docker.com/_/debian
+# VERSION   Latest from package manager
+# DOCS      https://registry.hub.docker.com/_/debian
 
 
 RUN apt-get update
@@ -36,7 +36,7 @@ RUN sed -i 's/memory          = psutil.phymem_usage()/memory          = psutil.v
 # 1. Configurating, compiling and setting up Statoshi from source files
 #
 # VERSION   Latest from GitHub, master branch
-# DOCS			https://github.com/ArtDodger/statoshi
+# DOCS      https://github.com/ArtDodger/statoshi
 
 
 RUN cd /tmp && git clone https://github.com/ArtDodger/statoshi
@@ -51,9 +51,9 @@ RUN cd /tmp/statoshi && make install
 # 2. Installing StatsD-stack, StatsD (node.js, npm, forever) and dependencies
 # 
 # VERSION   Latest from GitHub, master branch
-# DOCS			https://github.com/etsy/statsd/blob/master/README.md
-# DOCS			https://nodejs.org/documentation
-# DOCS			http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever
+# DOCS      https://github.com/etsy/statsd/blob/master/README.md
+# DOCS      https://nodejs.org/documentation
+# DOCS      http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever
 
 
 RUN apt-get install -y nodejs npm
@@ -68,11 +68,11 @@ RUN /usr/local/bin/forever start -c /usr/bin/nodejs /opt/statsd/stats.js /opt/st
 
 # 3. Installing graphite-stack, graphite (python, pip, whisper, memcached carbon, twisted) and dependencies
 #
-# VERSION	  Latest from package manager and Python's package index
-# DOCS			https://graphite.wikidot.com
-# DOCS			https://graphite.readthedocs.org
-# DOCS			https://wiki.python.org/moin/FrontPage
-# DOCS			https://wiki.python.org/moin/CheeseShopTutorial
+# VERSION   Latest from package manager and Python's package index
+# DOCS      https://graphite.wikidot.com
+# DOCS      https://graphite.readthedocs.org
+# DOCS      https://wiki.python.org/moin/FrontPage
+# DOCS      https://wiki.python.org/moin/CheeseShopTutorial
 
 
 RUN apt-get install -y libapache2-mod-wsgi memcached python-cairo python-django python-django-tagging python-memcache python-pip python-pysqlite2 python-simplejson python-twisted
@@ -95,8 +95,8 @@ RUN cd /tmp/graphite-web-0.9.13 && python setup.py install
 
 # 4. Installing Apache 2.2 and setting up configuration files
 #
-# VERSION	  2.4.1-common
-# DOCS			https://httpd.apache.org/docs/2.2
+# VERSION   2.4.1-common
+# DOCS      https://httpd.apache.org/docs/2.2
 
 
 RUN apt-get install -y apache2.2-common
@@ -117,8 +117,8 @@ RUN /etc/init.d/apache2 restart
 
 # 5. Installing grafana 2.0 the system metrics daemon and dependencies
 #
-# VERSION	  2.0.2
-# DOCS			http://docs.grafana.org/v2.0
+# VERSION   2.0.2
+# DOCS      http://docs.grafana.org/v2.0
 
 
 RUN apt-get install -y apt-transport-https
@@ -135,7 +135,7 @@ RUN wget "http://statoshi.info/img/statoshi.png" -O /usr/share/grafana/public/im
 
 # 6A. Hardening the Container. After setup of programs, opening ports, setting up ufw, etc.
 #
-# TODO		  Hardening the system, purge unnecessary packages, setting up iptables
+# TODO      Hardening the system, purge unnecessary packages, setting up iptables
 
 
 RUN wget "http://yabtcn.info/statoshi/bitcoind.conf.example" -O /etc/default/bitcoind >/dev/null 2>&1 && wget "http://yabtcn.info/statoshi/bitcoind.init.example" -O /etc/init.d/bitcoind >/dev/null 2>&1
