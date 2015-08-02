@@ -6,7 +6,7 @@
 
 FROM debian:latest
 MAINTAINER ArtDodger <info@yabtcn.info>
-LABEL statoshi.image-specs="{\"Description\":\"A containerized Statoshi\, a fork of Bitcoin Core\, running on Debian 8 using Docker\",\"Usage\":\"docker run -i -t artdodger\\/statoshi\:v.0.0.1 \\/usr\\/local\\/bin\\/bitcoind \&\",\"License\":\"GPL\",\"Version\":\"0.0.1-beta\"}"
+LABEL statoshi.image-specs="{\"Description\":\"A containerized Statoshi\, a fork of Bitcoin Core\, running on Debian 8 using Docker\",\"Usage\":\"docker run -it -p 80:80 yabtcn\\/statoshi-lite\:latest \\/usr\\/local\\/bin\\/bitcoind \&\",\"License\":\"GPL\",\"Version\":\"0.0.1-beta\"}"
 
 
 
